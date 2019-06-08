@@ -2,6 +2,8 @@ package dbGit;
 
 import java.sql.Connection;
 
+import commandprocessors.AbstractCommandProcessor;
+
 public class Test {
 
   /**
@@ -12,12 +14,12 @@ public class Test {
    */
   public static void main(String args[]) {
     try {
-      Connection c = PgConnectionUtility.getConnection();
       if (args == null || args.length < 1) {
         PrintHelper.printHelpMessageToScreen(DbGitCommand.HELP);
       }
-      DbGitCommand command = DbGitCommands.getCommandFromInputString(args[0]);
-      AbstractCommandProcessor commandProcessor = AbstractCommandProcessor.getCommandProcessor(command);
+      DbGitCommand command = DbGitCommand.getDbGitCommand(args[0]);
+      AbstractCommandProcessor commandProcessor =
+          AbstractCommandProcessor.getCommandProcessor(command);
       commandProcessor.process(args);
     } catch (Exception e) {
       e.printStackTrace();

@@ -1,4 +1,6 @@
-package dbGit;
+package commandprocessors;
+
+import dbGit.DbGitCommand;
 
 public abstract class AbstractCommandProcessor {
   protected String[] args;

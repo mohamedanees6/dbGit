@@ -1,11 +1,15 @@
-package dbGit;
+package commandprocessors;
+
+import java.sql.Connection;
+
+import dbGit.PgConnectionUtility;
 
 public class InitBranchProcessor extends AbstractCommandProcessor {
 
 
   @Override
   public void process(String[] args) throws Exception {
-    // TODO Auto-generated method stub
+    Connection c = PgConnectionUtility.getConnection();
     
   }
 

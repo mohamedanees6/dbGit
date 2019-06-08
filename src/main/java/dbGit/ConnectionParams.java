@@ -14,9 +14,6 @@ public class ConnectionParams {
   /** The password. */
   private String password;
 
-  /** The schema. */
-  private String schema;
-
   /** The db name. */
   private String dbName;
 

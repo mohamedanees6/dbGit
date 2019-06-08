@@ -1,4 +1,4 @@
-package dbGit;
+package commandprocessors;
 
 public class CheckoutBranchProcessor extends AbstractCommandProcessor {
 
