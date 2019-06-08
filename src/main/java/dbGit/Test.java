@@ -17,15 +17,12 @@ public class Test {
         PrintHelper.printHelpMessageToScreen(DbGitCommand.HELP);
       }
       DbGitCommand command = DbGitCommands.getCommandFromInputString(args[0]);
-      processCommand(command);
+      AbstractCommandProcessor commandProcessor = AbstractCommandProcessor.getCommandProcessor(command);
+      commandProcessor.process(args);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Exception " + e.getMessage());
     }
-  }
-
-  private static void processCommand(DbGitCommand command) {
-
   }
 }
 
