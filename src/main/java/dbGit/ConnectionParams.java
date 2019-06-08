@@ -1,109 +1,106 @@
 package dbGit;
 
-/**
- * The Class ConnectionParams.
- */
 public class ConnectionParams {
-
-  /** The port. */
-  private String port;
-
-  /** The user name. */
-  private String userName;
-
-  /** The password. */
-  private String password;
-
-  /** The db name. */
+  private String address;
+  private String dbUsername;
+  private String dbPassword;
+  private Integer port;
   private String dbName;
 
+  private ConnectionParams() {
+
+  }
+
   /**
-   * Gets the port.
-   *
+   * @return the address
+   */
+  public String getAddress() {
+    return address;
+  }
+
+  /**
+   * @param address the address to set
+   */
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  /**
+   * @return the dbUsername
+   */
+  public String getDbUsername() {
+    return dbUsername;
+  }
+
+  /**
+   * @param dbUsername the dbUsername to set
+   */
+  public void setDbUsername(String dbUsername) {
+    this.dbUsername = dbUsername;
+  }
+
+  /**
+   * @return the dbPassword
+   */
+  public String getDbPassword() {
+    return dbPassword;
+  }
+
+  /**
+   * @param dbPassword the dbPassword to set
+   */
+  public void setDbPassword(String dbPassword) {
+    this.dbPassword = dbPassword;
+  }
+
+  /**
    * @return the port
    */
-  public String getPort() {
+  public Integer getPort() {
     return port;
   }
 
   /**
-   * Sets the port.
-   *
-   * @param port the new port
+   * @param port the port to set
    */
-  public void setPort(String port) {
+  public void setPort(Integer port) {
     this.port = port;
   }
 
-  /**
-   * Gets the schema.
-   *
-   * @return the schema
-   */
-  public String getSchema() {
-    return schema;
-  }
-
-  /**
-   * Sets the schema.
-   *
-   * @param schema the new schema
-   */
-  public void setSchema(String schema) {
-    this.schema = schema;
-  }
-
-  /**
-   * Gets the password.
-   *
-   * @return the password
-   */
-  public String getPassword() {
-    return password;
-  }
-
-  /**
-   * Sets the password.
-   *
-   * @param password the new password
-   */
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  /**
-   * Gets the user name.
-   *
-   * @return the user name
-   */
-  public String getUserName() {
-    return userName;
-  }
-
-  /**
-   * Sets the user name.
-   *
-   * @param userName the new user name
-   */
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
-
-  /**
-   * Gets the db name.
-   *
-   * @return the db name
-   */
   public String getDbName() {
     return dbName;
   }
 
-  /**
-   * Sets the db name.
-   *
-   * @param dbName the new db name
-   */
   public void setDbName(String dbName) {
     this.dbName = dbName;
   }
+
+
+  public static ConnectionParams getConnectionParams(String[] args) {
+    ConnectionParams param = null;
+    String command = args[0];
+    String addressAndPort = args[1];
+    String dbName = args[2];
+    String dbUserName = args[3];
+    String dbPassword = args[4];
+    if (isInvalidParam(command, addressAndPort, dbName, dbUserName, dbPassword)) {
+      PrintHelper.printHelpMessageToScreen(DbGitCommand.HELP);
+    } else {
+      param = new ConnectionParams();
+      param.setAddress(addressAndPort.split(":")[0]);
+      param.setPort(Integer.parseInt(addressAndPort.split(":")[1]));
+      param.setDbName(dbName);
+      param.setDbUsername(dbUserName);
+      param.setDbPassword(dbPassword);
+    }
+    return param;
+  }
+
+  private static boolean isInvalidParam(String command, String addressAndPort, String dbName,
+      String dbUserName, String dbPassword) {
+    return addressAndPort == null || command == null || dbUserName == null || dbPassword == null
+        || !addressAndPort.contains(":") || addressAndPort.equals("null")
+        || dbName.equals("null") || dbUserName.equals("null");
+  }
+
 }
