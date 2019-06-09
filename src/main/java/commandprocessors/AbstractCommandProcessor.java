@@ -13,7 +13,7 @@ public abstract class AbstractCommandProcessor {
   protected Connection connection;
 
   protected Statement statement;
-  
+
   protected ConnectionParams connectionParams;
 
   public abstract void process(String branchName) throws Exception;
@@ -41,11 +41,10 @@ public abstract class AbstractCommandProcessor {
     return commandProcessor;
   }
 
-  public Statement preProcess(ConnectionParams connectionParam) throws Exception {
+  public void preProcess(ConnectionParams connectionParam) throws Exception {
     this.connection = PgConnectionUtility.getConnection(connectionParam);
     this.connectionParams = connectionParam;
-    this.statement = this.connection.createStatement();
-    return statement;
+    this.statement = null;
   }
 
   public void postProcess(Connection c, Statement statement) throws SQLException {

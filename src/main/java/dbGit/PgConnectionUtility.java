@@ -17,15 +17,22 @@ public class PgConnectionUtility {
    * @throws Exception the exception
    */
   public static Connection getConnection(ConnectionParams connectionParam) throws Exception {
-    Class.forName("org.postgresql.Driver");
-    Connection c = DriverManager.getConnection(
-        "jdbc:postgresql://" + connectionParam.getAddress() + ":" + connectionParam.getPort()
-            + "/" + connectionParam.getDbName(),
-        connectionParam.getDbUsername(), connectionParam.getDbPassword());
-    if (c == null) {
-      throw new Exception("Unable to obtain connection");
+    Connection con = null;
+    try {
+      Class.forName("org.postgresql.Driver");
+      con = DriverManager.getConnection(
+          "jdbc:postgresql://" + connectionParam.getAddress() + ":" + connectionParam.getPort()
+              + "/" + connectionParam.getDbName(),
+          connectionParam.getDbUsername(), connectionParam.getDbPassword());
+      if (con == null) {
+        throw new Exception("Unable to obtain connection");
+      }
+    } finally {
+      if (con != null && !con.isClosed()) {
+        con.close();
+      }
     }
-    return c;
+    return null;
   }
 
   public static void commitClose(Connection con, Statement st) throws SQLException {

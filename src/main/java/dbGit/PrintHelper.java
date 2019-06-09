@@ -20,9 +20,13 @@ public class PrintHelper {
       default:
         System.out.println("DbGit Usage Commands\n\n=====================================\n");
         printInitBranchHelpCommands();
+        System.out.println("=====================================\n");
         printDropBranchHelpCommands();
+        System.out.println("=====================================\n");
         printCheckoutBranchHelpCommands();
+        System.out.println("=====================================\n");
         printViewBranchesHelpCommands();
+        System.out.println("=====================================\n");
         break;
     }
   }

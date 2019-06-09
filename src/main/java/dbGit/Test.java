@@ -20,10 +20,14 @@ public class Test {
       AbstractCommandProcessor commandProcessor =
           AbstractCommandProcessor.getCommandProcessor(command);
       String branchName = null;
-      if (command != DbGitCommand.HELP && command != DbGitCommand.VIEW) {
-        branchName = args[5];
+      if (command != DbGitCommand.HELP) {
+        if (command != DbGitCommand.VIEW) {
+          branchName = args[5];
+        }
+        commandProcessor.execute(ConnectionParams.getConnectionParams(args), branchName);
+      } else {
+        commandProcessor.process(null);
       }
-      commandProcessor.execute(ConnectionParams.getConnectionParams(args), branchName);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Exception " + e.getMessage());
