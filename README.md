@@ -73,3 +73,6 @@ This is initial commit of an idea(After so much frustation of non-availability o
 
 ## Disclaimer
 Please have a backup of the database handy in some secure folder. This is entitled **only for development in local machine** and **not for production use.**
+
+****
+தமிழனின் படைப்பு, ಕರ್ನಾಟಕದಿಂದ! 💙💙
