@@ -42,6 +42,7 @@ public abstract class AbstractCommandProcessor {
   }
 
   public Statement preProcess(ConnectionParams connectionParam) throws Exception {
+    this.connection = PgConnectionUtility.getConnection(connectionParam);
     this.connectionParams = connectionParam;
     this.statement = this.connection.createStatement();
     return statement;

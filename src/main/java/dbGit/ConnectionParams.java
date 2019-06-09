@@ -91,15 +91,15 @@ public class ConnectionParams {
       param.setPort(Integer.parseInt(addressAndPort.split(":")[1]));
       param.setDbName(dbName);
       param.setDbUsername(dbUserName);
-      param.setDbPassword(dbPassword);
+      param.setDbPassword(dbPassword.equalsIgnoreCase("null") ? null : dbPassword);
     }
     return param;
   }
 
   private static boolean isInvalidParam(String command, String addressAndPort, String dbName,
       String dbUserName, String dbPassword) {
-    return addressAndPort == null || command == null || dbUserName == null || dbPassword == null
-        || !addressAndPort.contains(":") || addressAndPort.equals("null")
+    return addressAndPort == null || command == null || dbUserName == null
+        || dbPassword == null || !addressAndPort.contains(":") || addressAndPort.equals("null")
         || dbName.equals("null") || dbUserName.equals("null");
   }
 

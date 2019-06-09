@@ -29,17 +29,11 @@ public class PgConnectionUtility {
   }
 
   public static void commitClose(Connection con, Statement st) throws SQLException {
-    try {
-      con.commit();
-    } catch (SQLException e) {
-      con.rollback();
-    } finally {
-      if (st != null && !st.isClosed()) {
-        st.close();
-      }
-      if (con != null && !con.isClosed()) {
-        con.close();
-      }
+    if (st != null && !st.isClosed()) {
+      st.close();
+    }
+    if (con != null && !con.isClosed()) {
+      con.close();
     }
   }
 }
