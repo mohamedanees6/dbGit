@@ -3,6 +3,11 @@ Database version control for developers!
 
 ![dbGit Logo](https://github.com/mohamedanees6/dbGit/raw/master/src/main/resources/dbGit.png)
 
+## What it does?
+It is designed based on git VCS, but for Postgres Databases.
+
+Alike Git, which saves the snapshot of the file changed, this saves the snapshot of database(To be optimized, save yourselves a lot of disk space for now please!) whenever you branch.
+
 ## Prerequisites
 
 - Java 7 or above, install with Homebrew by following
