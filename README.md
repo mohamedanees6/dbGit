@@ -30,7 +30,7 @@ Go to the required directory and type in
 -  Paste the following line to your `~/.bash_profile`.
 `alias dbgit="java -jar dbGit.jar"`
 
-If you type in dbgit, you must get the help content.
+To verify this,type in dbgit and you must get the help content.
 
 ## Usage
 
