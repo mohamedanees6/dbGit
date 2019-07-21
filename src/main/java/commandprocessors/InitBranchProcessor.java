@@ -5,7 +5,7 @@ public class InitBranchProcessor extends AbstractCommandProcessor {
   @Override
   public void process(String branchName) throws Exception {
     String dbName = this.connectionParams.getDbName();
-    String command = "pg_dump " + dbName + " -f dbgit_" + dbName + "_" + branchName + ".sql";
+    String command = "pg_dump  -Z8 -Fc " + dbName + " -f dbgit_" + dbName + "_" + branchName + ".sql";
     Process exec = RuntimeExecHelper.execRuntimeCommand(command);
     if (exec.exitValue() != 0) {
       throw new Exception(
