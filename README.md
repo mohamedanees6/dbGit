@@ -29,8 +29,9 @@ Go to the required directory and type in
 - `wget https://github.com/mohamedanees6/dbGit/raw/master/src/main/dbGit.jar`, Downloads dbGit.jar from Github! to current repository
 -  Paste the following line to your `~/.bash_profile`.
 `alias dbgit="java -jar dbGit.jar"`
+-  `source ~/.bash_profile` to reload the configured alias in current tab.
 
-To verify this,type in dbgit and you must get the help content.
+To verify everything is working fine,type in dbgit and you must get the help content.
 
 ## Usage
 
