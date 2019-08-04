@@ -1,5 +1,10 @@
 package dbGit;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 public class ConnectionParams {
   private String address;
   private String dbUsername;
@@ -75,32 +80,24 @@ public class ConnectionParams {
     this.dbName = dbName;
   }
 
-
-  public static ConnectionParams getConnectionParams(String[] args) {
-    ConnectionParams param = null;
-    String command = args[0];
-    String addressAndPort = args[1];
-    String dbName = args[2];
-    String dbUserName = args[3];
-    String dbPassword = args[4];
-    if (isInvalidParam(command, addressAndPort, dbName, dbUserName, dbPassword)) {
-      PrintHelper.printHelpMessageToScreen(DbGitCommand.HELP);
-    } else {
-      param = new ConnectionParams();
-      param.setAddress(addressAndPort.split(":")[0]);
-      param.setPort(Integer.parseInt(addressAndPort.split(":")[1]));
-      param.setDbName(dbName);
-      param.setDbUsername(dbUserName);
-      param.setDbPassword(dbPassword.equalsIgnoreCase("null") ? null : dbPassword);
+  public static ConnectionParams readConfigurationFromFile() throws IOException {
+    ConnectionParams conParams = new ConnectionParams();
+    try (InputStream input = new FileInputStream("dbgit.properties")) {
+      Properties props = new Properties();
+      props.load(input);
+      conParams.setAddress(props.getProperty("db.address", "localhost"));
+      conParams.setPort(Integer.parseInt(props.getProperty(props.getProperty("db.port", "5432"))));
+      conParams.setDbName(props.getProperty(props.getProperty("db.name")));
+      conParams.setDbUsername(props.getProperty("db.username"));
+      conParams.setDbPassword(props.getProperty("db.password"));
     }
-    return param;
+    return conParams;
   }
 
-  private static boolean isInvalidParam(String command, String addressAndPort, String dbName,
-      String dbUserName, String dbPassword) {
-    return addressAndPort == null || command == null || dbUserName == null
-        || dbPassword == null || !addressAndPort.contains(":") || addressAndPort.equals("null")
-        || dbName.equals("null") || dbUserName.equals("null");
+
+  public static ConnectionParams getConnectionParams(String[] args) throws IOException {
+    ConnectionParams param = readConfigurationFromFile();
+    return param;
   }
 
 }
