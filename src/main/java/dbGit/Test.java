@@ -2,7 +2,7 @@ package dbGit;
 
 import commandprocessors.AbstractCommandProcessor;
 
-public class DbGit {
+public class Test {
 
   /**
    * The main method.
@@ -12,7 +12,7 @@ public class DbGit {
    */
   public static void main(String args[]) {
     try {
-      if (args == null || args.length != 2) {
+      if (args == null || args.length < 1) {
         PrintHelper.printHelpMessageToScreen(DbGitCommand.HELP);
         System.exit(1);
       }
@@ -22,7 +22,7 @@ public class DbGit {
       String branchName = null;
       if (command != DbGitCommand.HELP) {
         if (command != DbGitCommand.VIEW) {
-          branchName = args[1];
+          branchName = args[5];
         }
         commandProcessor.execute(ConnectionParams.getConnectionParams(args), branchName);
       } else {
